@@ -3,6 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Open sans", "sans-serif"],
+        display: ["Georama", "sans-serif"],
+      },
       colors: {
         brand: {
           50: "#f7fcf6",
