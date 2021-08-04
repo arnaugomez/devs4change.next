@@ -8,7 +8,7 @@ export const advantages: Advantage[] = [
     icon: ProgressIcon,
     name: "Learn by doing",
     description:
-      "Building real apps and websites for non-profits, NGOs & startups. Gain real-world skills and build your portfolio",
+      "Building real apps and websites for non-profits, NGOs & startups. Gain real-world skills and build your portfolio.",
   },
   {
     icon: UsersIcon,
