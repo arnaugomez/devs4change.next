@@ -81,6 +81,9 @@ module.exports = {
           900: "#286a6c",
         },
       },
+      height: {
+        "screen-80": "80vh",
+      },
     },
   },
   variants: {
