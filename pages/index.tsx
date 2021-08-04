@@ -6,6 +6,7 @@ export default function Home() {
     <>
       <Hero />
       <AdvantagesTriad />
+      {/*TODO: Add very simple CTA with two buttons: Join and I am a non-profit */}
     </>
   );
 }
