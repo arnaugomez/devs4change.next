@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="px-1 pb-1">
       <MaxWidth className="flex items-stretch h-screen-80 space-x-1">
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 flex flex-col justify-center pl-3">
           <h2 className="font-display italic font-thin text-6xl pb-6">
             Real learning.
             <br /> Real <span className="text-brand">change</span>.

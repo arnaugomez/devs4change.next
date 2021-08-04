@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
-import Header from "../../navigation/view/Header";
+import Footer from "../../navigation/view/components/Footer";
+import Header from "../../navigation/view/components/Header";
 
 interface Props {
   children: ReactNode;
@@ -9,7 +10,8 @@ export default function UIWrapper({ children }: Props) {
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
+      <Footer />
     </>
   );
 }
