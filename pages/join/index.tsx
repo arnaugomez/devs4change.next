@@ -73,13 +73,13 @@ export default function Join() {
               onBlur={handleBlur}
               error={errors.password && touched.password && errors.password}
             />
-            <div className="pt-4 flex justify-between">
+            <div className="pt-4 flex justify-between space-x-4">
               <Link href="/" passHref>
                 <Button hasBorder={false} isLink color="black">
-                  Join as a nonprofit
+                  Join as a non-profit
                 </Button>
               </Link>
-              <Button type="submit">Create user</Button>
+              <Button type="submit">Create account</Button>
             </div>
           </form>
         )}
