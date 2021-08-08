@@ -84,10 +84,14 @@ module.exports = {
       height: {
         "screen-80": "80vh",
       },
+      width: {
+        "min-content": "min-content",
+        "max-content": "max-content",
+      }
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

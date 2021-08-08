@@ -14,7 +14,7 @@ export const advantages: Advantage[] = [
     icon: UsersIcon,
     name: "Join a team",
     description:
-      "Projects for non-profits & startups are built together in a team of 2-4 developers so that you can build your network.",
+      "Projects for non-profits & startups are built together in a team of 2-4 developers so that you can grow your network.",
   },
   {
     icon: AwardIcon,

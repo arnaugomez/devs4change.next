@@ -3,6 +3,7 @@ import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import Image from "next/image";
 import HeroImg1 from "./../../../../public/assets/images/hero-1.jpg";
 import Button from "../../../common/view/atoms/Button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -19,12 +20,16 @@ export default function Hero() {
             your first software engineering job.
           </p>
           <div className="pt-4 space-x-3">
-            <Button color="cta" onClick={() => {}}>
-              Join
-            </Button>
-            <Button color="black" onClick={() => {}}>
-              I am a non-profit
-            </Button>
+            <Link href="/join" passHref>
+              <Button isLink color="cta">
+                Join
+              </Button>
+            </Link>
+            <Link href="/join/nonprofit" passHref>
+              <Button isLink color="black">
+                I am a non-profit
+              </Button>
+            </Link>
           </div>
         </div>
         <div
