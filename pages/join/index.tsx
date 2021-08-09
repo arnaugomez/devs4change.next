@@ -1,11 +1,12 @@
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import Link from "next/link";
-import React, from "react";
+import React, { useEffect } from "react";
 import Button from "../../src/common/view/components/atoms/Button";
 import InputText from "../../src/common/view/components/forms/InputText";
 import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
 import { useUserStore } from "../../src/user/view/store/userStore";
+import { useRouter } from "next/router";
 
 interface FormValues {
   userName: string;
@@ -26,12 +27,19 @@ const schema = yup.object().shape({
 });
 
 export default function Join() {
+  const router = useRouter();
   const { user, register } = useUserStore();
 
-  function onSubmit(values: FormValues) {
-    console.log(`Submit ${values.email} ${values.password} ${values.userName}`);
-    register(values.email, values.password);
+  async function onSubmit(values: FormValues, helpers: FormikHelpers<FormValues>) {
+    await register(values.userName, values.email, values.password);
+    helpers.setSubmitting(false);
   }
+
+  useEffect(() => {
+    if (user) {
+      router.push("/profile");
+    }
+  }, [user, router]);
 
   return (
     <LoginFormCard title="Join">
@@ -83,7 +91,11 @@ export default function Join() {
                   Join as a non-profit
                 </Button>
               </Link>
-              <Button type="submit">Create account</Button>
+              {isSubmitting ? (
+                <span>Submitting...</span>
+              ) : (
+                <Button type="submit">Create account</Button>
+              )}
             </div>
           </form>
         )}
