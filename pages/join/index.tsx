@@ -5,28 +5,36 @@ import Button from "../../src/common/view/atoms/Button";
 import InputText from "../../src/common/view/components/forms/InputText";
 import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
+import { useUserStore } from "../../src/user/view/store/userStore";
 
 interface FormValues {
-  user: string;
+  userName: string;
   email: string;
   password: string;
 }
 
 const initialValues: FormValues = {
-  user: "",
+  userName: "",
   email: "",
   password: "",
 };
 
 const schema = yup.object().shape({
-  user: yup.string().required(),
+  userName: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
 });
 
 export default function Join() {
-  function onSubmit(values: FormValues) {
-    console.log(`Submit ${values.email} ${values.password} ${values.user}`);
+  const { user, register } = useUserStore();
+
+  async function onSubmit(values: FormValues) {
+    console.log(`Submit ${values.email} ${values.password} ${values.userName}`);
+    try {
+      await register(values.email, values.password);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -49,11 +57,11 @@ export default function Join() {
             <InputText
               label="Username"
               type="text"
-              name="user"
-              value={values.user}
+              name="userName"
+              value={values.userName}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={errors.user && touched.user && errors.user}
+              error={errors.userName && touched.userName && errors.userName}
             />
             <InputText
               label="Email"
