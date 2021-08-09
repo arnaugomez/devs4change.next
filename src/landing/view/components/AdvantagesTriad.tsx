@@ -1,5 +1,5 @@
 import React from "react";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { advantages } from "../../data/advantages";
 import AdvantagesTriadItem from "./AdvantagesTriadItem";
 

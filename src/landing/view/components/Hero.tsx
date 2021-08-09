@@ -1,8 +1,8 @@
 import React from "react";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import Image from "next/image";
 import HeroImg1 from "./../../../../public/assets/images/hero-1.jpg";
-import Button from "../../../common/view/atoms/Button";
+import Button from "../../../common/view/components/atoms/Button";
 import Link from "next/link";
 
 export default function Hero() {

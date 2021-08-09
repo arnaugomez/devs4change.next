@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useState } from "react";
-import Button from "../../src/common/view/atoms/Button";
+import React, from "react";
+import Button from "../../src/common/view/components/atoms/Button";
 import InputText from "../../src/common/view/components/forms/InputText";
 import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
@@ -28,13 +28,9 @@ const schema = yup.object().shape({
 export default function Join() {
   const { user, register } = useUserStore();
 
-  async function onSubmit(values: FormValues) {
+  function onSubmit(values: FormValues) {
     console.log(`Submit ${values.email} ${values.password} ${values.userName}`);
-    try {
-      await register(values.email, values.password);
-    } catch (e) {
-      console.log(e);
-    }
+    register(values.email, values.password);
   }
 
   return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import GitHubIcon from "../../../../public/assets/icons/github.svg";
 import AlertIcon from "../../../../public/assets/icons/alert-triangle.svg";
 import AddUserIcon from "../../../../public/assets/icons/user-plus.svg";

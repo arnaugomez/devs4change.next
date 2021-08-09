@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../common/view/atoms/Button";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import Button from "../../../common/view/components/atoms/Button";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import Link from "next/link";
 
 export default function Header() {
