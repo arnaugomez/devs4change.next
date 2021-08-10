@@ -14,26 +14,35 @@ export function useUserStore() {
   const [user, setUser] = useRecoilState(userState);
   const { errorAlert } = useAlertsStore();
 
+  async function login(email: string, password: string) {
+    try {
+      const newUser = await new UserRepository().login(email, password);
+      setUser(newUser);
+    } catch (e) {
+      console.error(e);
+      errorAlert(e.message);
+    }
+  }
+
   async function register(
-    userName: string,
+    displayName: string,
     email: string,
     password: string,
     userType: UserType
   ) {
     try {
       const newUser = await new UserRepository().register(
-        userName,
+        displayName,
         email,
         password,
         userType
       );
-      console.log(newUser);
       setUser(newUser);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       errorAlert(e.message);
     }
   }
 
-  return { user, register };
+  return { user, login, register };
 }

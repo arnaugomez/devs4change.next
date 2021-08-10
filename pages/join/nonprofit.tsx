@@ -1,36 +1,51 @@
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../src/common/view/components/atoms/Button";
 import InputText from "../../src/common/view/components/forms/InputText";
 import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
+import { useUserStore } from "../../src/user/view/store/userStore";
+import { UserType } from "../../src/user/domain/UserType";
+import { useLoginRedirect } from "../../src/user/view/hooks/useLoginRedirect";
 
 interface FormValues {
-  user: string;
+  displayName: string;
   email: string;
   password: string;
 }
 
 const initialValues: FormValues = {
-  user: "",
+  displayName: "",
   email: "",
   password: "",
 };
 
 const schema = yup.object().shape({
-  user: yup.string().required(),
+  displayName: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
 });
 
 export default function JoinNonprofit() {
-  function onSubmit(values: FormValues) {
-    console.log(`Submit ${values.email} ${values.password} ${values.user}`);
+  useLoginRedirect();
+  const { register } = useUserStore();
+
+  async function onSubmit(
+    values: FormValues,
+    helpers: FormikHelpers<FormValues>
+  ) {
+    await register(
+      values.displayName,
+      values.email,
+      values.password,
+      UserType.NONPROFIT
+    );
+    helpers.setSubmitting(false);
   }
 
   return (
-    <LoginFormCard title="Join as a non-profit">
+    <LoginFormCard title="Join as a nonprofit">
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -49,11 +64,13 @@ export default function JoinNonprofit() {
             <InputText
               label="Username"
               type="text"
-              name="user"
-              value={values.user}
+              name="displayName"
+              value={values.displayName}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={errors.user && touched.user && errors.user}
+              error={
+                errors.displayName && touched.displayName && errors.displayName
+              }
             />
             <InputText
               label="Email"
@@ -74,12 +91,16 @@ export default function JoinNonprofit() {
               error={errors.password && touched.password && errors.password}
             />
             <div className="pt-4 flex justify-between space-x-4">
-              <Link href="/" passHref>
+              <Link href="/join" passHref>
                 <Button hasBorder={false} isLink color="black">
-                  Join as a dev
+                  I am a developer
                 </Button>
               </Link>
-              <Button type="submit">Create account</Button>
+              {isSubmitting ? (
+                <span>Submitting...</span>
+              ) : (
+                <Button type="submit">Create account</Button>
+              )}
             </div>
           </form>
         )}
