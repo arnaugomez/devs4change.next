@@ -37,12 +37,13 @@ export class UserRepository extends BaseRepository {
     await updateProfile(user, {
       displayName,
     });
-    await setDoc(doc(this.db, "users", user.uid), {
+    console.log(this.db)
+    await setDoc(doc(this.db, "/users", user.uid), {
       displayName,
       email,
       type: userType
     });
-    const snapshot = await getDoc(doc(this.db, "users", user.uid))
+    const snapshot = await getDoc(doc(this.db, "/users", user.uid))
 
     return firebaseUserToUser(snapshot);
   }

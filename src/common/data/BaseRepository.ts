@@ -4,7 +4,7 @@ export class BaseRepository {
   private static baseRepositoryInstance: BaseRepository;
   db: Firestore;
   constructor() {
-    if (BaseRepository.baseRepositoryInstance !== null) {
+    if (BaseRepository.baseRepositoryInstance) {
       return BaseRepository.baseRepositoryInstance;
     }
     this.db = getFirestore();
