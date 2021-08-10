@@ -1,11 +1,15 @@
 import { User } from "../../domain/User";
 
-import { User as FirebaseUser } from "firebase/auth";
+import { UserType } from "../../domain/UserType";
+import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 
-export function firebaseUserToUser(user: FirebaseUser): User {
+export function firebaseUserToUser(snapshot: DocumentSnapshot<DocumentData>): User {
+  const data = snapshot.data()
+  
   return {
-    id: user.uid,
-    email: user.email,
-    name: user.displayName,
+    id: snapshot.id,
+    email: data.email,
+    name: data.displayName,
+    type: UserType[data.type],
   };
 }

@@ -23,7 +23,6 @@ export function useAlertsStore() {
     const newAlert = new Alert(alertData);
     setAlerts([newAlert, ...alerts]);
     setTimeout(() => {
-      console.log("timeout");
       removeAlert(newAlert.id);
     }, 14000);
   }

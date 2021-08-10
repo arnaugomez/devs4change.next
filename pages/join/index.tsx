@@ -7,6 +7,7 @@ import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
 import { useUserStore } from "../../src/user/view/store/userStore";
 import { useRouter } from "next/router";
+import { UserType } from "../../src/user/domain/UserType";
 
 interface FormValues {
   userName: string;
@@ -31,7 +32,7 @@ export default function Join() {
   const { user, register } = useUserStore();
 
   async function onSubmit(values: FormValues, helpers: FormikHelpers<FormValues>) {
-    await register(values.userName, values.email, values.password);
+    await register(values.userName, values.email, values.password, UserType.DEV);
     helpers.setSubmitting(false);
   }
 
