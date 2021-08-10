@@ -1,4 +1,6 @@
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // Add the Firebase products that you want to use
 
@@ -18,20 +20,7 @@ var firebaseConfig = {
   measurementId: "G-SZ0R0RFYX0",
 };
 
-/**
- * Singleton
- */
-export class FirebaseProvider {
-  firebase: FirebaseApp;
+initializeApp(firebaseConfig);
 
-  private static instance: FirebaseProvider;
-
-  constructor() {
-    if (FirebaseProvider.instance) {
-      return FirebaseProvider.instance;
-    }
-    this.firebase = initializeApp(firebaseConfig);
-    FirebaseProvider.instance = this;
-    return this;
-  }
-}
+export const auth = getAuth();
+export const db = getFirestore();
