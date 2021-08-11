@@ -1,7 +1,7 @@
 import React from "react";
 import { useHeaderBackgroundStore } from "../store/headerBackgroundStore";
 import SafeImage from "./atoms/SafeImage";
-import FallbackImage from "../../../../public/assets/images/hero-1.jpg";
+import FallbackImage from "../../../../public/assets/placeholders/header-background.jpg";
 
 export default function HeaderBackground() {
   const { headerBackground } = useHeaderBackgroundStore();

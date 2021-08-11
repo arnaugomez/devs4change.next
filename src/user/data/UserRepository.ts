@@ -1,10 +1,8 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
+  updateProfile
 } from "firebase/auth";
-import { firebaseUserToUser } from "./transformers/firebaseUserToUser";
-import { User } from "../domain/User";
 import {
   collection,
   doc,
@@ -12,12 +10,14 @@ import {
   getDocs,
   query,
   setDoc,
-  where,
+  where
 } from "firebase/firestore";
-import { UserType } from "../domain/UserType";
-import { auth, db } from "../../common/data/firebase";
 import slugify from "slugify";
+import { auth, db } from "../../common/data/firebase";
 import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
+import { User } from "../domain/User";
+import { UserType } from "../domain/UserType";
+import { firebaseUserToUser } from "./transformers/firebaseUserToUser";
 
 async function generateUserSlug(displayName: string): Promise<string> {
   let slug = slugify(displayName, { lower: true });

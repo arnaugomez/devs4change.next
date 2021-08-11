@@ -7,8 +7,8 @@ import AddUserIcon from "../../../../public/assets/icons/user-plus.svg";
 
 export default function Footer() {
   return (
-    <footer className="p-1 pt-20">
-      <MaxWidth className="border border-black px-4 py-6 text-center">
+    <footer className="p-1.5 pt-20">
+      <MaxWidth className="relative border border-black px-4 py-6 text-center bg-white">
         <h2 className="font-display font-light italic text-3xl transform pb-3">
           Devs for Change
         </h2>

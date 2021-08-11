@@ -8,16 +8,24 @@ const headerBackgroundState = atom<Image | "USE_PLACEHOLDER">({
 });
 
 export function useHeaderBackgroundStore() {
-  const [headerBackground, setHeaderBackground] = useRecoilState(
+  const [headerBackground, _setHeaderBackground] = useRecoilState(
     headerBackgroundState
   );
 
+  const setHeaderBackground = useCallback(
+    (image: Image) => {
+      if (!image) {
+        _setHeaderBackground("USE_PLACEHOLDER");
+      } else {
+        _setHeaderBackground(image);
+      }
+    },
+    [_setHeaderBackground]
+  );
+
   const clearHeaderBackground = useCallback(() => {
-    setHeaderBackground(null);
-  }, [setHeaderBackground]);
-  const setPlaceholderBackground = useCallback(() => {
-    setHeaderBackground("USE_PLACEHOLDER");
-  }, [setHeaderBackground]);
+    _setHeaderBackground(null);
+  }, [_setHeaderBackground]);
 
   return { headerBackground, setHeaderBackground, clearHeaderBackground };
 }
