@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { useHeaderBackgroundStore } from "../../../common/view/store/headerBackgroundStore";
 import { User } from "../../domain/User";
+import ProfileHeader from "./ProfileHeader";
 
 export interface Props {
   user: User;
@@ -25,6 +27,12 @@ export default function Profile({ user, isLoggedIn }: Props) {
       clearHeaderBackground();
     };
   }, [user, setHeaderBackground, clearHeaderBackground]);
-  
-  return <div></div>;
+
+  return (
+    <section className="px-4">
+      <MaxWidth>
+        <ProfileHeader user={user} />
+      </MaxWidth>
+    </section>
+  );
 }

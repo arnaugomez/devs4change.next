@@ -13,7 +13,6 @@ interface Context {
 
 export async function getServerSideProps({ params: { slug } }: Context) {
   const user = await getUserBySlug(slug);
-  console.log(user);
 
   return {
     props: { user },
