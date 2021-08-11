@@ -12,7 +12,6 @@ export function useLoginRedirect(route?: string) {
 
   useEffect(() => {
     if (user && (nonprofit || developer)) {
-      console.log(developer);
       router.push(route || "/home");
     }
   }, [user, router, route, nonprofit, developer]);

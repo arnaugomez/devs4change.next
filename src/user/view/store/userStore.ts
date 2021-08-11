@@ -41,9 +41,7 @@ export function useUserStore() {
         password,
         userType
       );
-      console.log(userType);
       if (userType === UserType.DEV) {
-        console.log("I'm a dev");
         await developerStore.create(newUser);
       } else if (userType === UserType.NONPROFIT) {
         await nonprofitStore.create(newUser);

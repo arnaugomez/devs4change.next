@@ -5,14 +5,36 @@ import {
 } from "firebase/auth";
 import { firebaseUserToUser } from "./transformers/firebaseUserToUser";
 import { User } from "../domain/User";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { UserType } from "../domain/UserType";
 import { auth, db } from "../../common/data/firebase";
 import slugify from "slugify";
+import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
 
-// TODO: Assure that slug is unique by checking database
-function generateUserSlug(displayName: string): string {
-  return slugify(displayName);
+async function generateUserSlug(displayName: string): Promise<string> {
+  let slug = slugify(displayName, { lower: true });
+  let num = 0;
+  while (await getUserBySlug(getCompositeSlug(slug, num))) {
+    num++
+  }
+  return getCompositeSlug(slug, num)
+}
+
+export async function getUserBySlug(slug: string): Promise<User> {
+  const q = query(collection(db, "users"), where("slug", "==", slug));
+  const result = await getDocs(q);
+  if (result.empty) {
+    return null;
+  }
+  return firebaseUserToUser(result.docs[0]);
 }
 
 async function getUserByUid(uid: string): Promise<User> {
@@ -30,7 +52,7 @@ export async function registerUser(
   await updateProfile(user, { displayName });
   await setDoc(doc(db, "/users", user.uid), {
     displayName,
-    slug: slugify(displayName),
+    slug: await generateUserSlug(displayName),
     email,
     type: userType,
   });
@@ -41,7 +63,6 @@ export async function loginUser(
   email: string,
   password: string
 ): Promise<User> {
-  console.log(auth);
   const { user } = await signInWithEmailAndPassword(auth, email, password);
   return await getUserByUid(user.uid);
 }
