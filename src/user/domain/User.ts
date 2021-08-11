@@ -10,6 +10,7 @@ export interface User {
    * The user's username
    */
   displayName: string;
+  slug: string;
   /**
    * Whether the user is a developer, a non-profit, or a startup
    */

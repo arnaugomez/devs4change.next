@@ -7,7 +7,7 @@ export function firebaseUserToUser(
   snapshot: DocumentSnapshot<DocumentData>
 ): User {
   const { id } = snapshot;
-  const { email, displayName, type } = snapshot.data();
+  const { email, displayName, slug, type } = snapshot.data();
 
-  return { id, email, displayName, type: UserType[type] };
+  return { id, email, displayName, slug, type: UserType[type] };
 }
