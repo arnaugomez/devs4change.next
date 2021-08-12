@@ -7,6 +7,7 @@ import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
 import { useUserStore } from "../../src/user/view/store/userStore";
 import { useLoginRedirect } from "../../src/user/view/hooks/useLoginRedirect";
+import { useNonprofitStore } from "../../src/nonprofit/view/store/nonprofitStore";
 
 interface FormValues {
   email: string;
@@ -23,7 +24,7 @@ const schema = yup.object().shape({
   password: yup.string().required(),
 });
 
-export default function JoinNonprofit() {
+export default function Login() {
   useLoginRedirect();
   const { login } = useUserStore();
 

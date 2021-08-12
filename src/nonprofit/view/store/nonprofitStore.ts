@@ -1,6 +1,6 @@
 import { atom, useRecoilState } from "recoil";
 import { User } from "../../../user/domain/User";
-import { createNonprofit } from "../../data/NonprofitRepository";
+import { createNonprofit, getNonprofitById } from "../../data/NonprofitRepository";
 import { Nonprofit } from "../../domain/Nonprofit";
 
 const nonprofitState = atom<Nonprofit>({
@@ -15,6 +15,10 @@ export function useNonprofitStore() {
     await createNonprofit(user);
     setNonprofit({ id: user.id });
   }
+  async function updateNonprofit(user: User): Promise<void> {
+    const nonprofit = await getNonprofitById(user.id);
+    setNonprofit(nonprofit);
+  }
 
-  return { nonprofit, create };
+  return { nonprofit, create, updateNonprofit};
 }

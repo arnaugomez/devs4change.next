@@ -1,6 +1,6 @@
 import { atom, useRecoilState } from "recoil";
 import { User } from "../../../user/domain/User";
-import { createDeveloper } from "../../data/developerRepository";
+import { createDeveloper, getDeveloperById } from "../../data/developerRepository";
 import { Developer } from "../../domain/Developer";
 
 const developerState = atom<Developer>({
@@ -15,6 +15,10 @@ export function useDeveloperStore() {
     await createDeveloper(user);
     setDeveloper({ id: user.id });
   }
+  async function updateDeveloper(user: User): Promise<void> {
+    const developer = await getDeveloperById(user.id);
+    setDeveloper(developer);
+  }
 
-  return { developer, create };
+  return { developer, create, updateDeveloper };
 }

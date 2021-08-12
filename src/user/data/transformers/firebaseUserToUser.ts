@@ -2,6 +2,7 @@ import { User } from "../../domain/User";
 
 import { UserType } from "../../domain/UserType";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
+import { cleanse } from "../../../common/utils/cleanse";
 
 export function firebaseUserToUser(
   snapshot: DocumentSnapshot<DocumentData>
@@ -12,12 +13,12 @@ export function firebaseUserToUser(
   const { id } = snapshot;
   const { email, displayName, slug, type, backgroundImage } = snapshot.data();
 
-  return {
+  return cleanse({
     id,
     email,
     displayName,
     slug,
-    backgroundImage: backgroundImage ?? null,
+    backgroundImage,
     type: UserType[type] ?? null,
-  };
+  });
 }
