@@ -21,13 +21,13 @@ interface Payload {
 
 export async function getServerSideProps({ params: { slug } }: Context) {
   const user = await getUserBySlug(slug);
-  const developer = await getDeveloperById(user.id)
-  const nonprofit = await getNonprofitById(user.id)
+  if (!user) {
+    return { notFound: true };
+  }
+  const developer = await getDeveloperById(user.id);
+  const nonprofit = await getNonprofitById(user.id);
 
-  return {
-    props: { user, developer, nonprofit },
-    notFound: !user,
-  };
+  return { props: { user, developer, nonprofit } };
 }
 
 export default function ProfileSlug(payload: Payload) {

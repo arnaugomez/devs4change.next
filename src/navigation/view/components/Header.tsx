@@ -2,6 +2,8 @@ import React from "react";
 import Button from "../../../common/view/components/atoms/Button";
 import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import Link from "next/link";
+import { useUserStore } from "../../../user/view/store/userStore";
+import HeaderNavigation from "./HeaderNavigation";
 
 export default function Header() {
   return (
@@ -10,14 +12,7 @@ export default function Header() {
         <h1 className="font-display font-light italic text-3xl transform -translate-y-0.5">
           <Link href="/">Devs for Change</Link>
         </h1>
-        <nav className="flex items-stretch space-x-3">
-          <Link href="/login" passHref>
-            <Button isLink color="black">Log in</Button>
-          </Link>
-          <Link href="/join" passHref>
-            <Button isLink color="cta">Join</Button>
-          </Link>
-        </nav>
+        <HeaderNavigation />
       </MaxWidth>
     </header>
   );

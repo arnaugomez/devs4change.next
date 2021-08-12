@@ -7,5 +7,6 @@ import _ from 'lodash'
  * @returns That same object but without the undefined properties
  */
 export function cleanse<T>(obj: T): T {
-  return _.omitBy(obj, _.isUndefined).value();
+  console.log(_.omitBy)
+  return _.omitBy(obj, _.isUndefined) as T
 }
