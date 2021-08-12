@@ -19,6 +19,7 @@ export function useDeveloperStore() {
     const developer = await getDeveloperById(user.id);
     setDeveloper(developer);
   }
+  const clearDeveloper =() => setDeveloper(null)
 
-  return { developer, create, updateDeveloper };
+  return { developer, create, updateDeveloper, clearDeveloper };
 }

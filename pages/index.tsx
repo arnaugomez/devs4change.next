@@ -1,7 +1,9 @@
 import AdvantagesTriad from "../src/landing/view/components/AdvantagesTriad";
 import Hero from "../src/landing/view/components/Hero";
+import { useLoginRedirect } from "../src/user/view/hooks/useLoginRedirect";
 
-export default function Home() {
+export default function Landing() {
+  useLoginRedirect();
   return (
     <>
       <Hero />

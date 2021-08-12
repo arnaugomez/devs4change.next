@@ -19,6 +19,7 @@ export function useNonprofitStore() {
     const nonprofit = await getNonprofitById(user.id);
     setNonprofit(nonprofit);
   }
+  const clearNonprofit = () => setNonprofit(null)
 
-  return { nonprofit, create, updateNonprofit};
+  return { nonprofit, create, updateNonprofit, clearNonprofit };
 }

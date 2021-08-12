@@ -5,7 +5,7 @@ import { useAlertsStore } from "../../../common/view/store/useAlertsStore";
 import { UserType } from "../../domain/UserType";
 import { useNonprofitStore } from "../../../nonprofit/view/store/nonprofitStore";
 import { useDeveloperStore } from "../../../developer/view/store/developerStore";
-import { loginUser, registerUser } from "../../data/userRepository";
+import { loginUser, logoutUser, registerUser } from "../../data/userRepository";
 
 const userState = atom<User>({
   key: "user",
@@ -58,5 +58,17 @@ export function useUserStore() {
     }
   }
 
-  return { user, login, register };
+  async function logout() {
+    try {
+      await logoutUser();
+      nonprofitStore.clearNonprofit();
+      developerStore.clearDeveloper();
+      setUser(null);
+    } catch (e) {
+      console.error(e);
+      errorAlert(e.message);
+    }
+  }
+
+  return { user, login, register, logout };
 }

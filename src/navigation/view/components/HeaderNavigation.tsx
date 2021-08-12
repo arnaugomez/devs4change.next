@@ -5,7 +5,7 @@ import SafeImage from "../../../common/view/components/atoms/SafeImage";
 import { useUserStore } from "../../../user/view/store/userStore";
 
 export default function HeaderNavigation() {
-  const { user } = useUserStore();
+  const { user, logout } = useUserStore();
   if (!user) {
     return (
       <nav className="flex items-stretch space-x-3">
@@ -24,7 +24,7 @@ export default function HeaderNavigation() {
   }
   return (
     <nav className="flex items-stretch space-x-3">
-      <Button isLink color="black">
+      <Button color="black" hasBorder={false} onClick={logout}>
         Log out
       </Button>
       <div className="flex items-center">

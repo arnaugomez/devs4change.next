@@ -1,7 +1,8 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
+  updateProfile,
+  signOut,
 } from "firebase/auth";
 import {
   collection,
@@ -10,7 +11,7 @@ import {
   getDocs,
   query,
   setDoc,
-  where
+  where,
 } from "firebase/firestore";
 import slugify from "slugify";
 import { auth, db } from "../../common/data/firebase";
@@ -23,9 +24,9 @@ async function generateUserSlug(displayName: string): Promise<string> {
   let slug = slugify(displayName, { lower: true });
   let num = 0;
   while (await getUserBySlug(getCompositeSlug(slug, num))) {
-    num++
+    num++;
   }
-  return getCompositeSlug(slug, num)
+  return getCompositeSlug(slug, num);
 }
 
 export async function getUserBySlug(slug: string): Promise<User> {
@@ -65,4 +66,8 @@ export async function loginUser(
 ): Promise<User> {
   const { user } = await signInWithEmailAndPassword(auth, email, password);
   return await getUserByUid(user.uid);
+}
+
+export async function logoutUser() {
+  await signOut(auth);
 }
