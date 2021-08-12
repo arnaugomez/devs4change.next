@@ -20,8 +20,13 @@ export function useUserStore() {
 
   async function login(email: string, password: string) {
     try {
-      const newUser = await loginUser(email, password);
-      setUser(newUser);
+      const loggedUser = await loginUser(email, password);
+      if (loggedUser.type === UserType.DEV) {
+        await developerStore.updateDeveloper(loggedUser);
+      } else if (loggedUser.type === UserType.NONPROFIT) {
+        await nonprofitStore.updateNonprofit(loggedUser);
+      }
+      setUser(loggedUser);
     } catch (e) {
       console.error(e);
       errorAlert(e.message);
