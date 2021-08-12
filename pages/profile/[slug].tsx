@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useHeaderBackgroundStore } from "../../src/common/view/store/headerBackgroundStore";
+import { Developer } from "../../src/developer/domain/Developer";
+import { Nonprofit } from "../../src/nonprofit/domain/Nonprofit";
 import { getUserBySlug } from "../../src/user/data/userRepository";
 import { User } from "../../src/user/domain/User";
 import Profile from "../../src/user/view/components/Profile";
@@ -11,6 +11,12 @@ interface Context {
   };
 }
 
+interface Payload {
+  user: User;
+  nonprofit: Nonprofit;
+  developer: Developer;
+}
+
 export async function getServerSideProps({ params: { slug } }: Context) {
   const user = await getUserBySlug(slug);
 
@@ -20,12 +26,12 @@ export async function getServerSideProps({ params: { slug } }: Context) {
   };
 }
 
-export default function ProfileSlug({ user }: { user: User }) {
+export default function ProfileSlug(payload: Payload) {
   const userStore = useUserStore();
   return (
     <Profile
-      user={user}
-      isLoggedIn={userStore.user && userStore.user.id === user.id}
+      {...payload}
+      isLoggedIn={userStore.user && userStore.user.id === payload.user.id}
     />
   );
 }

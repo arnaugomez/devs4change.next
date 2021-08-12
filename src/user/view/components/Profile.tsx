@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { useHeaderBackgroundStore } from "../../../common/view/store/headerBackgroundStore";
+import { Developer } from "../../../developer/domain/Developer";
+import { Nonprofit } from "../../../nonprofit/domain/Nonprofit";
 import { User } from "../../domain/User";
+import ProfileBio from "./ProfileBio";
 import ProfileHeader from "./ProfileHeader";
 
 export interface Props {
@@ -10,6 +13,8 @@ export interface Props {
    * Whether the user shown in this profile page is the one who has logged in
    */
   isLoggedIn: boolean;
+  nonprofit: Nonprofit
+  developer: Developer
 }
 
 export default function Profile({ user, isLoggedIn }: Props) {
@@ -32,6 +37,7 @@ export default function Profile({ user, isLoggedIn }: Props) {
     <section className="px-4">
       <MaxWidth>
         <ProfileHeader user={user} />
+        <ProfileBio user={user} />
       </MaxWidth>
     </section>
   );

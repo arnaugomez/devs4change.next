@@ -10,13 +10,14 @@ export function firebaseUserToUser(
     return null;
   }
   const { id } = snapshot;
-  const { email, displayName, slug, type, backgroundImage } = snapshot.data();
+  const { email, displayName, slug, type, backgroundImage, bio } = snapshot.data();
 
   return {
     id,
     email,
     displayName,
     slug,
+    bio: bio ?? null,
     backgroundImage: backgroundImage ?? null,
     type: UserType[type] ?? null,
   };
