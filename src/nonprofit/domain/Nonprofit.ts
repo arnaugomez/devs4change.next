@@ -1,3 +1,4 @@
+import { User } from './../../user/domain/User';
 import { Challenge } from "../../challenge/domain/Challenge";
 import { NonprofitType } from "./NonprofitType";
 
@@ -12,4 +13,5 @@ export interface Nonprofit {
    * @todo Create Challenge data model
    */
   challenges?: Challenge[];
+  user?: User
 }

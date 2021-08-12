@@ -1,3 +1,4 @@
+import { User } from './../../user/domain/User';
 import { DeveloperProject } from "./DeveloperProject";
 
 export interface Developer {
@@ -13,5 +14,6 @@ export interface Developer {
    * 1-7 Technologies that the developer is comfortable working with.
    */
   techStack?: string[];
+  user?: User
 }
 // TODO: Add challenges that the developer has applied to and/or been accepted to.
