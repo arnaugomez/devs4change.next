@@ -1,4 +1,6 @@
+import { getDeveloperById } from "../../src/developer/data/developerRepository";
 import { Developer } from "../../src/developer/domain/Developer";
+import { getNonprofitById } from "../../src/nonprofit/data/NonprofitRepository";
 import { Nonprofit } from "../../src/nonprofit/domain/Nonprofit";
 import { getUserBySlug } from "../../src/user/data/userRepository";
 import { User } from "../../src/user/domain/User";
@@ -19,9 +21,11 @@ interface Payload {
 
 export async function getServerSideProps({ params: { slug } }: Context) {
   const user = await getUserBySlug(slug);
+  const developer = await getDeveloperById(user.id)
+  const nonprofit = await getNonprofitById(user.id)
 
   return {
-    props: { user },
+    props: { user, developer, nonprofit },
     notFound: !user,
   };
 }
