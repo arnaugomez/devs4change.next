@@ -1,13 +1,16 @@
 import React from "react";
+import ChallengeFormIntro from "../../src/challenge/domain/view/ChallengeFormIntro";
+import NewChallengeForm from "../../src/challenge/domain/view/NewChallengeForm";
 import MaxWidth from "../../src/common/view/components/atoms/MaxWidth";
 import { useDeveloperRedirect } from "../../src/user/view/hooks/useDeveloperRedirect";
 
 export default function NewChallenge() {
   useDeveloperRedirect();
   return (
-    <section className="px-4">
+    <section className="px-4 pt-12">
       <MaxWidth>
-        <h2>Create new challenge</h2>
+        <ChallengeFormIntro />
+        <NewChallengeForm />
       </MaxWidth>
     </section>
   );

@@ -13,7 +13,7 @@ export async function createNonprofit(user: User): Promise<void> {
 }
 
 export async function getNonprofitById(id: string): Promise<Nonprofit> {
-  const nonprofit = await getDoc(doc(db, "/developers", id))
+  const nonprofit = await getDoc(doc(db, "/nonprofits", id))
   return nonprofitFromFirebase(nonprofit)
 }
 

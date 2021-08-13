@@ -2,8 +2,7 @@ import React from "react";
 import cn from "classnames";
 
 interface Props {
-  value: string;
-  type: "text" | "email" | "password";
+  value: number;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
   label?: string;
@@ -12,21 +11,17 @@ interface Props {
   placeholder?: string;
 }
 
-export default function InputText({
-  label,
-  error,
-  type = "text",
-  ...props
-}: Props) {
+export default function InputNumber({ label, error, value, ...props }: Props) {
   return (
     <label className="block flex-1 pb-4">
       {label && <span className="text-gray-700">{label}</span>}
       <input
-        type={type}
+        type="number"
         className={cn(
           "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black",
           error && "border-danger"
         )}
+        value={value || ""}
         {...props}
       />
       {error && (
