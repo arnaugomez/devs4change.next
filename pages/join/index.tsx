@@ -45,7 +45,7 @@ export default function Join() {
   }
 
   return (
-    <LoginFormCard title="Join">
+    <LoginFormCard title={<>Join as a <span className="text-cta">developer</span></>}>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

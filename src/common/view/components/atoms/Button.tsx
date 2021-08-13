@@ -10,6 +10,12 @@ export interface ButtonProps {
   hasBorder?: boolean;
 }
 
+const mapColorToDisplayColor: Record<ButtonProps["color"], string> = {
+  brand: "brand-600",
+  cta: "cta",
+  black: "black",
+};
+
 export default class Button extends Component<ButtonProps> {
   render() {
     const {
@@ -22,13 +28,14 @@ export default class Button extends Component<ButtonProps> {
     } = this.props;
 
     const ButtonTag = isLink ? "a" : "button";
+    const displayColor = mapColorToDisplayColor[color];
 
     return (
       <ButtonTag
         type={type}
         className={cn(
-          `px-3.5 py-1.5 rounded bg-white text-${color} hover:bg-${color} hover:text-white`,
-          hasBorder && `border border-${color}`
+          `px-3.5 py-1.5 rounded bg-white text-${displayColor} hover:bg-${displayColor} hover:text-white`,
+          hasBorder && `border border-${displayColor}`
         )}
         {...props}
       >

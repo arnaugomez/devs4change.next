@@ -45,7 +45,13 @@ export default function JoinNonprofit() {
   }
 
   return (
-    <LoginFormCard title="Join as a nonprofit">
+    <LoginFormCard
+      title={
+        <>
+          Join as a <span className="text-brand-600">nonprofit</span>
+        </>
+      }
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
