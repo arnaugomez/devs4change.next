@@ -2,7 +2,9 @@ import Link from "next/link";
 import React from "react";
 import Button from "../../../common/view/components/atoms/Button";
 import SafeImage from "../../../common/view/components/atoms/SafeImage";
+import { UserType } from "../../../user/domain/UserType";
 import { useUserStore } from "../../../user/view/store/userStore";
+import HeaderNavigationNonprofit from "./HeaderNavigationNonprofit";
 
 export default function HeaderNavigation() {
   const { user, logout } = useUserStore();
@@ -24,6 +26,7 @@ export default function HeaderNavigation() {
   }
   return (
     <nav className="flex items-stretch space-x-3">
+      {user.type === UserType.NONPROFIT && <HeaderNavigationNonprofit />}
       <Button color="black" hasBorder={false} onClick={logout}>
         Log out
       </Button>
