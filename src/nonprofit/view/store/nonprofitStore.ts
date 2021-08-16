@@ -22,7 +22,6 @@ export function useNonprofitStore() {
   }
   async function loginNonprofit(user: User): Promise<void> {
     const nonprofit = await getNonprofitById(user.id);
-    console.log(nonprofit)
     setNonprofit(nonprofit);
   }
 

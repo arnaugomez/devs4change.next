@@ -9,11 +9,14 @@ import { useUserStore } from "../store/userStore";
  */
 export function useDeveloperRedirect(route?: string) {
   const router = useRouter();
-  const { user } = useUserStore();
+  const { user, isFetchingPersistedUser } = useUserStore();
 
   useEffect(() => {
+    if (isFetchingPersistedUser) {
+      return;
+    }
     if (!user || user.type === UserType.DEV) {
       router.push(route || "/home");
     }
-  }, [user, router, route]);
+  }, [user, router, route, isFetchingPersistedUser]);
 }

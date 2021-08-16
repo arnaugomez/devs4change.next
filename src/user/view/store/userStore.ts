@@ -40,7 +40,7 @@ export function useUserStore() {
       setIsFetchingPersistedUser(false);
       return;
     } else if (loggedUser.type === UserType.DEV) {
-      await developerStore.updateDeveloper(loggedUser);
+      await developerStore.loginDeveloper(loggedUser);
     } else if (loggedUser.type === UserType.NONPROFIT) {
       await nonprofitStore.loginNonprofit(loggedUser);
     }
@@ -53,7 +53,7 @@ export function useUserStore() {
     try {
       const loggedUser = await loginUser(email, password);
       if (loggedUser.type === UserType.DEV) {
-        await developerStore.updateDeveloper(loggedUser);
+        await developerStore.loginDeveloper(loggedUser);
       } else if (loggedUser.type === UserType.NONPROFIT) {
         await nonprofitStore.loginNonprofit(loggedUser);
       }

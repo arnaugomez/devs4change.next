@@ -1,10 +1,11 @@
-import { DocumentData, DocumentSnapshot } from "firebase/firestore";
+import { DocumentData, DocumentReference, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { cleanse } from "../../../common/utils/cleanse";
+import { firebaseUserToUser } from "../../../user/data/transformers/firebaseUserToUser";
 import { Challenge } from "../../domain/Challenge";
 
-export function challengeFromFirebase(
+export async function challengeFromFirebase(
   snapshot: DocumentSnapshot<DocumentData>
-): Challenge {
+): Promise<Challenge> {
   if (!snapshot.exists()) {
     return null;
   }
@@ -19,8 +20,11 @@ export function challengeFromFirebase(
     developersAmount,
     startDate,
     completed,
-    developers,
+    user
+    //developers,
   } = snapshot.data();
+  
+  const userSnapshot = user && await getDoc(user as DocumentReference<DocumentData>)
 
   return cleanse({
     id,
@@ -33,6 +37,7 @@ export function challengeFromFirebase(
     developersAmount,
     startDate,
     completed,
-    developers,
+    // developers,
+    user: user && firebaseUserToUser(userSnapshot)
   });
 }

@@ -21,7 +21,7 @@ export async function getChallengeBySlug(slug: string): Promise<Challenge> {
   if (result.empty) {
     return null;
   }
-  return challengeFromFirebase(result.docs[0]);
+  return await challengeFromFirebase(result.docs[0]);
 }
 
 async function generateChallengeSlug(name: string): Promise<string> {
@@ -44,5 +44,5 @@ export async function createChallenge(
     ...variables,
   });
   const challenge = await getDoc(result);
-  return challengeFromFirebase(challenge);
+  return await challengeFromFirebase(challenge);
 }

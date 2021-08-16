@@ -22,5 +22,5 @@ export async function getServerSideProps({ params: { slug } }: Context) {
 }
 
 export default function ChallengeSlug({ challenge }: Payload) {
-  return <div></div>;
+  return <div>{JSON.stringify(challenge)}</div>;
 }

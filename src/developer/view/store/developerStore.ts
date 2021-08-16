@@ -21,5 +21,5 @@ export function useDeveloperStore() {
   }
   const clearDeveloper =() => setDeveloper(null)
 
-  return { developer, create, updateDeveloper, clearDeveloper };
+  return { developer, create, loginDeveloper: updateDeveloper, clearDeveloper };
 }
