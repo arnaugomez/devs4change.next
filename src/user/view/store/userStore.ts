@@ -26,6 +26,7 @@ export function useUserStore() {
       } else if (loggedUser.type === UserType.NONPROFIT) {
         await nonprofitStore.loginNonprofit(loggedUser);
       }
+      console.log(loggedUser)
       setUser(loggedUser);
     } catch (e) {
       console.error(e);

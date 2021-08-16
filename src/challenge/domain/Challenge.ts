@@ -1,4 +1,5 @@
 import { Developer } from "../../developer/domain/Developer";
+import { User } from "../../user/domain/User";
 
 export interface Challenge {
   /**
@@ -35,4 +36,5 @@ export interface Challenge {
   /** The developers that have been SELECTED by the nonprofit to do the challenge */
   developers?: Developer[];
   // applications?: Application[]
+  user?: User[]
 }

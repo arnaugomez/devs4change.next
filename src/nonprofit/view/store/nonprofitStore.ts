@@ -22,14 +22,11 @@ export function useNonprofitStore() {
   }
   async function loginNonprofit(user: User): Promise<void> {
     const nonprofit = await getNonprofitById(user.id);
+    console.log(nonprofit)
     setNonprofit(nonprofit);
   }
 
-  async function addChallenge(challenge: Challenge): Promise<void> {
-    const newNonprofit = await addChallengeToNonprofit(nonprofit, challenge);
-    setNonprofit(newNonprofit);
-  }
   const clearNonprofit = () => setNonprofit(null);
 
-  return { nonprofit, create, loginNonprofit, clearNonprofit, addChallenge };
+  return { nonprofit, create, loginNonprofit, clearNonprofit };
 }

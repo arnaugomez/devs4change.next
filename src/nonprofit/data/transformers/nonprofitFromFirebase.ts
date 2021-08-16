@@ -9,6 +9,6 @@ export function nonprofitFromFirebase(
     return null;
   }
   const { id } = snapshot;
-  const { type, challenges } = snapshot.data();
-  return cleanse({ id, type, challenges });
+  const { type } = snapshot.data();
+  return cleanse({ id, type });
 }

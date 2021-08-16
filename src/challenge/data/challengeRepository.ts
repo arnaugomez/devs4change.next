@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  doc,
   getDoc,
   getDocs,
   query,
@@ -9,6 +10,7 @@ import {
 import slugify from "slugify";
 import { db } from "../../common/data/firebase";
 import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
+import { User } from "../../user/domain/User";
 import { Challenge } from "../domain/Challenge";
 import { CreateChallengeVariables } from "./challengeRepositoryVariables";
 import { challengeFromFirebase } from "./transformers/challengeFromFirebase";
@@ -32,12 +34,15 @@ async function generateChallengeSlug(name: string): Promise<string> {
 }
 
 export async function createChallenge(
-  variables: CreateChallengeVariables
+  variables: CreateChallengeVariables,
+  user: User
 ): Promise<Challenge> {
+  const userRef = doc(db, "users", user.id);
   const result = await addDoc(collection(db, "challenges"), {
-    slug: generateChallengeSlug(variables.name),
+    slug: await generateChallengeSlug(variables.name),
+    user: userRef,
     ...variables,
   });
   const challenge = await getDoc(result);
-  return challengeFromFirebase(challenge)
+  return challengeFromFirebase(challenge);
 }
