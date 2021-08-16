@@ -29,8 +29,8 @@ export interface Challenge {
   /** Expected amount of developers that we need to complete the challenge. 1-5 developers */
   developersAmount?: number;
   /** Expected date that the challenge will start */
-  startDate?: Date;
-  coverImage?: string;
+  startDate?: Date | string;
+  backgroundImage?: string;
   /** Whether the challenge has been successfully completed */
   completed?: boolean;
   /** The developers that have been SELECTED by the nonprofit to do the challenge */

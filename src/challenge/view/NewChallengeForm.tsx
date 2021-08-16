@@ -52,7 +52,7 @@ export default function NewChallengeForm() {
   ) {
     const challenge = await challengeStore.create(values);
     helpers.setSubmitting(false);
-    await router.push(`challenge/${challenge.slug}`);
+    await router.push(`/challenge/${challenge.slug}`);
   }
   return (
     <Formik

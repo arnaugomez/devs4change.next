@@ -1,6 +1,7 @@
 import React from "react";
 import { getChallengeBySlug } from "../../src/challenge/data/challengeRepository";
 import { Challenge } from "../../src/challenge/domain/Challenge";
+import ChallengeDetail from "../../src/challenge/view/ChallengeDetail";
 
 interface Context {
   params: {
@@ -18,9 +19,12 @@ export async function getServerSideProps({ params: { slug } }: Context) {
     return { notFound: true };
   }
 
+  challenge.startDate = challenge.startDate.toString();
+
   return { props: { challenge } };
 }
 
 export default function ChallengeSlug({ challenge }: Payload) {
-  return <div>{JSON.stringify(challenge)}</div>;
+  challenge.startDate = new Date(challenge.startDate);
+  return <ChallengeDetail {...challenge} />;
 }

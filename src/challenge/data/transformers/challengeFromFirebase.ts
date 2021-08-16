@@ -1,4 +1,10 @@
-import { DocumentData, DocumentReference, DocumentSnapshot, getDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  DocumentReference,
+  DocumentSnapshot,
+  getDoc,
+} from "firebase/firestore";
+import { date } from "yup/lib/locale";
 import { cleanse } from "../../../common/utils/cleanse";
 import { firebaseUserToUser } from "../../../user/data/transformers/firebaseUserToUser";
 import { Challenge } from "../../domain/Challenge";
@@ -18,13 +24,15 @@ export async function challengeFromFirebase(
     description,
     duration,
     developersAmount,
+    backgroundImage,
     startDate,
     completed,
-    user
+    user,
     //developers,
   } = snapshot.data();
-  
-  const userSnapshot = user && await getDoc(user as DocumentReference<DocumentData>)
+
+  const userSnapshot =
+    user && (await getDoc(user as DocumentReference<DocumentData>));
 
   return cleanse({
     id,
@@ -33,11 +41,12 @@ export async function challengeFromFirebase(
     intro,
     result,
     description,
+    backgroundImage,
     duration,
     developersAmount,
     startDate,
     completed,
     // developers,
-    user: user && firebaseUserToUser(userSnapshot)
+    user: user && firebaseUserToUser(userSnapshot),
   });
 }

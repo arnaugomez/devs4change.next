@@ -1,8 +1,5 @@
 import React from "react";
-import Button from "../../../common/view/components/atoms/Button";
 import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
-import Link from "next/link";
-import { useUserStore } from "../../../user/view/store/userStore";
 import HeaderNavigation from "./HeaderNavigation";
 import HeaderLogo from "./HeaderLogo";
 
