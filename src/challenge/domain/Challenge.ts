@@ -36,5 +36,5 @@ export interface Challenge {
   /** The developers that have been SELECTED by the nonprofit to do the challenge */
   developers?: Developer[];
   // applications?: Application[]
-  user?: User[]
+  user?: User
 }
