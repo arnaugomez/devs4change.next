@@ -1,6 +1,11 @@
 import { atom, useRecoilState } from "recoil";
+import { Challenge } from "../../../challenge/domain/Challenge";
 import { User } from "../../../user/domain/User";
-import { createNonprofit, getNonprofitById } from "../../data/NonprofitRepository";
+import {
+  addChallengeToNonprofit,
+  createNonprofit,
+  getNonprofitById,
+} from "../../data/NonprofitRepository";
 import { Nonprofit } from "../../domain/Nonprofit";
 
 const nonprofitState = atom<Nonprofit>({
@@ -15,11 +20,16 @@ export function useNonprofitStore() {
     await createNonprofit(user);
     setNonprofit({ id: user.id });
   }
-  async function updateNonprofit(user: User): Promise<void> {
+  async function loginNonprofit(user: User): Promise<void> {
     const nonprofit = await getNonprofitById(user.id);
     setNonprofit(nonprofit);
   }
-  const clearNonprofit = () => setNonprofit(null)
 
-  return { nonprofit, create, updateNonprofit, clearNonprofit };
+  async function addChallenge(challenge: Challenge): Promise<void> {
+    const newNonprofit = await addChallengeToNonprofit(nonprofit, challenge);
+    setNonprofit(newNonprofit);
+  }
+  const clearNonprofit = () => setNonprofit(null);
+
+  return { nonprofit, create, loginNonprofit, clearNonprofit, addChallenge };
 }

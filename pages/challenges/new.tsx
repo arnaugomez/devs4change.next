@@ -1,6 +1,6 @@
 import React from "react";
-import ChallengeFormIntro from "../../src/challenge/domain/view/ChallengeFormIntro";
-import NewChallengeForm from "../../src/challenge/domain/view/NewChallengeForm";
+import ChallengeFormIntro from "../../src/challenge/view/ChallengeFormIntro";
+import NewChallengeForm from "../../src/challenge/view/NewChallengeForm";
 import MaxWidth from "../../src/common/view/components/atoms/MaxWidth";
 import { useDeveloperRedirect } from "../../src/user/view/hooks/useDeveloperRedirect";
 

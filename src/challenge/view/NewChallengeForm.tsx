@@ -1,10 +1,11 @@
 import { Formik, FormikHelpers } from "formik";
 import React from "react";
 import * as yup from "yup";
-import Button from "../../../common/view/components/atoms/Button";
-import InputDate from "../../../common/view/components/forms/InputDate";
-import InputNumber from "../../../common/view/components/forms/InputNumber";
-import InputText from "../../../common/view/components/forms/InputText";
+import Button from "../../common/view/components/atoms/Button";
+import InputDate from "../../common/view/components/forms/InputDate";
+import InputNumber from "../../common/view/components/forms/InputNumber";
+import InputText from "../../common/view/components/forms/InputText";
+import { useChallengeStore } from "./store/challengeStore";
 
 interface FormValues {
   name: string;
@@ -13,7 +14,7 @@ interface FormValues {
   /** Expected result of the challenge */
   result: string;
   /** A long explanation of the challenge, in html markup */
-  description?: string;
+  description?: string; // TODO: Implement with WYSIWIG editor
   /** Expected duration of the challenge */
   duration?: string;
   /** Expected amount of developers that we need to complete the challenge. 1-5 developers */
@@ -42,12 +43,13 @@ const schema = yup.object().shape({
 });
 
 export default function NewChallengeForm() {
-  function handleSubmit(
+  const challengeStore = useChallengeStore();
+  async function handleSubmit(
     values: FormValues,
     helpers: FormikHelpers<FormValues>
   ) {
-    console.log("Form submitted");
-    setTimeout(() => helpers.setSubmitting(false), 2000);
+    await challengeStore.create(values);
+    helpers.setSubmitting(false);
   }
   return (
     <Formik

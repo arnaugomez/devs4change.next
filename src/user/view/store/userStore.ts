@@ -24,7 +24,7 @@ export function useUserStore() {
       if (loggedUser.type === UserType.DEV) {
         await developerStore.updateDeveloper(loggedUser);
       } else if (loggedUser.type === UserType.NONPROFIT) {
-        await nonprofitStore.updateNonprofit(loggedUser);
+        await nonprofitStore.loginNonprofit(loggedUser);
       }
       setUser(loggedUser);
     } catch (e) {
