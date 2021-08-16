@@ -1,4 +1,5 @@
 import { Formik, FormikHelpers } from "formik";
+import { useRouter } from "next/router";
 import React from "react";
 import * as yup from "yup";
 import Button from "../../common/view/components/atoms/Button";
@@ -44,12 +45,14 @@ const schema = yup.object().shape({
 
 export default function NewChallengeForm() {
   const challengeStore = useChallengeStore();
+  const router = useRouter();
   async function handleSubmit(
     values: FormValues,
     helpers: FormikHelpers<FormValues>
   ) {
-    await challengeStore.create(values);
+    const challenge = await challengeStore.create(values);
     helpers.setSubmitting(false);
+    await router.push(`challenge/${challenge.slug}`);
   }
   return (
     <Formik

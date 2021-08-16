@@ -3,6 +3,9 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
+  setPersistence,
+  browserLocalPersistence,
+  
 } from "firebase/auth";
 import {
   collection,
@@ -70,4 +73,16 @@ export async function loginUser(
 
 export async function logoutUser() {
   await signOut(auth);
+}
+
+export async function persistUserData():Promise<void> {
+  await setPersistence(auth, browserLocalPersistence);
+}
+
+export async function getPersistedUser():Promise<User> {
+  const user = auth.currentUser
+  if(!user) {
+    return null;
+  }
+  return await getUserByUid(user.uid);
 }

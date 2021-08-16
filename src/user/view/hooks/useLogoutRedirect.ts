@@ -4,11 +4,11 @@ import { useUserStore } from "../store/userStore";
 
 export function useLogoutRedirect(route?: string) {
   const router = useRouter();
-  const { user } = useUserStore();
+  const { user, isFetchingPersistedUser } = useUserStore();
 
   useEffect(() => {
-    if (!user) {
+    if (!isFetchingPersistedUser && !user) {
       router.push(route || "/login");
     }
-  }, [user, router, route]);
+  }, [isFetchingPersistedUser, user, router, route]);
 }
