@@ -6,9 +6,7 @@ import { Challenge } from "../../domain/Challenge";
 export function useChallengeStore() {
   const { user } = useUserStore();
   async function create(values: CreateChallengeVariables): Promise<Challenge> {
-    const challenge = await createChallenge(values, user);
-
-    return challenge;
+    return await createChallenge(values, user);
   }
 
   return { create };
