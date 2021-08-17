@@ -4,6 +4,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   query,
   where,
 } from "firebase/firestore";
@@ -41,8 +42,20 @@ export async function createChallenge(
   const result = await addDoc(collection(db, "challenges"), {
     slug: await generateChallengeSlug(variables.name),
     user: userRef,
+    isCompleted: false,
     ...variables,
   });
   const challenge = await getDoc(result);
   return await challengeFromFirebase(challenge);
+}
+
+export async function getLatestChallenges(): Promise<Challenge[]> {
+  const firstChallenges = query(
+    collection(db, "challenges"),
+    where("isCompleted", "==", false),
+    limit(20)
+  );
+  const challengesSnapshots = await getDocs(firstChallenges);
+  console.log(challengesSnapshots.docs);
+  return await Promise.all(challengesSnapshots.docs.map(challengeFromFirebase));
 }
