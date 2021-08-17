@@ -26,7 +26,7 @@ export default function ChallengeDetailBody({
           <h3 className="font-display font-bold text-xl pt-8 pb-1">
             Start date
           </h3>
-          <p>{startDate.toString()}</p>
+          <p>{startDate.toLocaleString()}</p>
         </div>
         <div className="flex-1">
           <h3 className="font-display font-bold text-xl pt-8 pb-1">

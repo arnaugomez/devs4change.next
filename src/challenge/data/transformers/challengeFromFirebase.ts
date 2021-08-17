@@ -44,7 +44,7 @@ export async function challengeFromFirebase(
     backgroundImage,
     duration,
     developersAmount,
-    startDate,
+    startDate: startDate.toDate(),
     completed,
     // developers,
     user: user && firebaseUserToUser(userSnapshot),

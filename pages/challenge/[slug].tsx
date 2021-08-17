@@ -19,12 +19,12 @@ export async function getServerSideProps({ params: { slug } }: Context) {
     return { notFound: true };
   }
 
-  challenge.startDate = challenge.startDate.toString();
+  challenge.startDate = (challenge.startDate as Date).toISOString()
 
   return { props: { challenge } };
 }
 
 export default function ChallengeSlug({ challenge }: Payload) {
-  challenge.startDate = new Date(challenge.startDate);
+  challenge.startDate = new Date(challenge.startDate)
   return <ChallengeDetail {...challenge} />;
 }
