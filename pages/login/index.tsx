@@ -7,6 +7,7 @@ import LoginFormCard from "../../src/user/view/components/LoginFormCard";
 import * as yup from "yup";
 import { useUserStore } from "../../src/user/view/store/userStore";
 import { useLoginRedirect } from "../../src/user/view/hooks/useLoginRedirect";
+import GoogleButton from "../../src/common/view/components/GoogleButton";
 
 interface FormValues {
   email: string;
@@ -25,7 +26,7 @@ const schema = yup.object().shape({
 
 export default function Login() {
   useLoginRedirect();
-  const { login } = useUserStore();
+  const { login, loginWithGoogle } = useUserStore();
 
   async function onSubmit(
     values: FormValues,
@@ -85,6 +86,10 @@ export default function Login() {
           </form>
         )}
       </Formik>
+      <p className="py-3  text-center italic">or</p>
+      <div className="flex justify-center">
+        <GoogleButton text="Google Login" onClick={loginWithGoogle} />
+      </div>
     </LoginFormCard>
   );
 }

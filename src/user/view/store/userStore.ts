@@ -8,6 +8,7 @@ import { useDeveloperStore } from "../../../developer/view/store/developerStore"
 import {
   getPersistedUser,
   loginUser,
+  loginUserWithGoogle,
   logoutUser,
   persistUserData,
   registerUser,
@@ -119,6 +120,23 @@ export function useUserStore() {
     }
   }
 
+  async function loginWithGoogle() {
+    await persistUserData();
+    try {
+      const loggedUser = await loginUserWithGoogle();
+      if (loggedUser.type === UserType.DEV) {
+        await developerStore.loginDeveloper(loggedUser);
+      } else if (loggedUser.type === UserType.NONPROFIT) {
+        await nonprofitStore.loginNonprofit(loggedUser);
+      }
+      console.log(loggedUser);
+      setUser(loggedUser);
+    } catch (e) {
+      console.error(e);
+      errorAlert(e.message);
+    }
+  }
+
   return {
     isFetchingPersistedUser,
     user,
@@ -127,5 +145,6 @@ export function useUserStore() {
     logout,
     getPersisted,
     joinWithGoogle,
+    loginWithGoogle,
   };
 }

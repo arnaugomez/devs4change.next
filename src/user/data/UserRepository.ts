@@ -102,3 +102,8 @@ export async function registerUserWithGoogle(
   });
   return await getUserByUid(user.uid);
 }
+
+export async function loginUserWithGoogle(): Promise<User> {
+  const { user } = await signInWithPopup(auth, googleAuthProvider);
+  return await getUserByUid(user.uid);
+}
