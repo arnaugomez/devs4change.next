@@ -36,7 +36,7 @@ export default function HeaderNavigation() {
             <SafeImage
               layout="fill"
               objectFit="cover"
-              src={user.backgroundImage}
+              src={user.photoURL}
               alt={"Profile picture of " + user.displayName}
             />
           </a>

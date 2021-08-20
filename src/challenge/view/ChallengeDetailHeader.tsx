@@ -15,7 +15,7 @@ export default function ChallengeDetailHeader({ name, user }: Challenge) {
             <SafeImage
               layout="fill"
               objectFit="cover"
-              src={user.backgroundImage}
+              src={user.photoURL}
               alt={"Profile picture of " + user.displayName}
             />
           </div>

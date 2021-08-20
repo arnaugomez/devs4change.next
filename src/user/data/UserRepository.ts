@@ -5,7 +5,8 @@ import {
   signOut,
   setPersistence,
   browserLocalPersistence,
-  
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import {
   collection,
@@ -17,7 +18,7 @@ import {
   where,
 } from "firebase/firestore";
 import slugify from "slugify";
-import { auth, db } from "../../common/data/firebase";
+import { auth, db, googleAuthProvider } from "../../common/data/firebase";
 import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
 import { User } from "../domain/User";
 import { UserType } from "../domain/UserType";
@@ -75,14 +76,29 @@ export async function logoutUser() {
   await signOut(auth);
 }
 
-export async function persistUserData():Promise<void> {
+export async function persistUserData(): Promise<void> {
   await setPersistence(auth, browserLocalPersistence);
 }
 
-export async function getPersistedUser():Promise<User> {
-  const user = auth.currentUser
-  if(!user) {
+export async function getPersistedUser(): Promise<User> {
+  const user = auth.currentUser;
+  if (!user) {
     return null;
   }
+  return await getUserByUid(user.uid);
+}
+
+export async function registerUserWithGoogle(
+  userType: UserType
+): Promise<User> {
+  const { user } = await signInWithPopup(auth, googleAuthProvider);
+  const { displayName, uid, email, photoURL } = user;
+  await setDoc(doc(db, "/users", uid), {
+    displayName,
+    slug: await generateUserSlug(displayName),
+    email,
+    type: userType,
+    photoURL
+  });
   return await getUserByUid(user.uid);
 }

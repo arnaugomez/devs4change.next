@@ -11,7 +11,7 @@ export function firebaseUserToUser(
     return null;
   }
   const { id } = snapshot;
-  const { email, displayName, slug, type, backgroundImage, bio } =
+  const { email, displayName, slug, type, backgroundImage, bio, photoURL } =
     snapshot.data();
 
   return cleanse({
@@ -21,6 +21,7 @@ export function firebaseUserToUser(
     slug,
     bio,
     backgroundImage,
+    photoURL,
     type: UserType[type] ?? null,
   });
 }

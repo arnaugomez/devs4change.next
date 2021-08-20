@@ -21,7 +21,7 @@ export default function ProfileHeader({ user }: Props) {
         <SafeImage
           layout="fill"
           objectFit="cover"
-          src={user.photoUrl}
+          src={user.photoURL}
           alt={`Foto de perfil de ${user.displayName}`}
         />
       </div>

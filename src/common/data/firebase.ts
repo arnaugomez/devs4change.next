@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // Add the Firebase products that you want to use
@@ -23,4 +23,6 @@ var firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const auth = getAuth();
+auth.useDeviceLanguage();
 export const db = getFirestore();
+export const googleAuthProvider = new GoogleAuthProvider();

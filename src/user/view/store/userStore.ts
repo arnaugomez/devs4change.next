@@ -11,6 +11,7 @@ import {
   logoutUser,
   persistUserData,
   registerUser,
+  registerUserWithGoogle,
 } from "../../data/userRepository";
 import { useCallback } from "react";
 
@@ -57,7 +58,7 @@ export function useUserStore() {
       } else if (loggedUser.type === UserType.NONPROFIT) {
         await nonprofitStore.loginNonprofit(loggedUser);
       }
-      console.log(loggedUser)
+      console.log(loggedUser);
       setUser(loggedUser);
     } catch (e) {
       console.error(e);
@@ -102,6 +103,29 @@ export function useUserStore() {
       errorAlert(e.message);
     }
   }
+  async function joinWithGoogle(userType: UserType) {
+    try {
+      await persistUserData();
+      const newUser = await registerUserWithGoogle(userType);
+      if (userType === UserType.DEV) {
+        await developerStore.create(newUser);
+      } else if (userType === UserType.NONPROFIT) {
+        await nonprofitStore.create(newUser);
+      }
+      setUser(newUser);
+    } catch (e) {
+      console.error(e);
+      errorAlert(e.message);
+    }
+  }
 
-  return { isFetchingPersistedUser, user, login, register, logout, getPersisted };
+  return {
+    isFetchingPersistedUser,
+    user,
+    login,
+    register,
+    logout,
+    getPersisted,
+    joinWithGoogle,
+  };
 }

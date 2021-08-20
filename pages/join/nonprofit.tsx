@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useUserStore } from "../../src/user/view/store/userStore";
 import { UserType } from "../../src/user/domain/UserType";
 import { useLoginRedirect } from "../../src/user/view/hooks/useLoginRedirect";
+import GoogleButton from "../../src/common/view/components/GoogleButton";
 
 interface FormValues {
   displayName: string;
@@ -29,7 +30,7 @@ const schema = yup.object().shape({
 
 export default function JoinNonprofit() {
   useLoginRedirect();
-  const { register } = useUserStore();
+  const { register, joinWithGoogle } = useUserStore();
 
   async function onSubmit(
     values: FormValues,
@@ -111,6 +112,11 @@ export default function JoinNonprofit() {
           </form>
         )}
       </Formik>
+
+      <p className="py-3  text-center italic">or</p>
+      <div className="flex justify-center">
+        <GoogleButton onClick={() => joinWithGoogle(UserType.NONPROFIT)} />
+      </div>
     </LoginFormCard>
   );
 }

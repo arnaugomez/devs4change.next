@@ -26,7 +26,7 @@ export interface User {
   /**
    * Profile picture of the user
    */
-  photoUrl?: string;
+  photoURL?: string;
   
   backgroundImage?: string;
 }
