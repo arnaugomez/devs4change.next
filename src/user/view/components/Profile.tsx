@@ -13,14 +13,14 @@ export interface Props {
    * Whether the user shown in this profile page is the one who has logged in
    */
   isLoggedIn: boolean;
-  nonprofit: Nonprofit
-  developer: Developer
+  nonprofit: Nonprofit;
+  developer: Developer;
 }
 
 export default function Profile({ user, isLoggedIn }: Props) {
   const { setHeaderBackground, clearHeaderBackground } =
     useHeaderBackgroundStore();
-
+  
   useEffect(() => {
     setHeaderBackground(
       user?.backgroundImage && {

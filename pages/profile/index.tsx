@@ -1,4 +1,5 @@
 import React from "react";
+import Loading from "../../src/common/view/components/atoms/Loading";
 import { useDeveloperStore } from "../../src/developer/view/store/developerStore";
 import { useNonprofitStore } from "../../src/nonprofit/view/store/nonprofitStore";
 import Profile from "../../src/user/view/components/Profile";
@@ -11,14 +12,16 @@ export default function ProfilePage() {
   const { developer } = useDeveloperStore();
   const { nonprofit } = useNonprofitStore();
 
+  if (!user) {
+    return <Loading />;
+  }
+
   return (
-    user && (
-      <Profile
-        user={user}
-        developer={developer}
-        nonprofit={nonprofit}
-        isLoggedIn
-      />
-    )
+    <Profile
+      user={user}
+      developer={developer}
+      nonprofit={nonprofit}
+      isLoggedIn
+    />
   );
 }
