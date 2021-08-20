@@ -34,7 +34,7 @@ export default class Button extends Component<ButtonProps> {
       <ButtonTag
         type={type}
         className={cn(
-          `px-3.5 py-1.5 rounded bg-white text-${displayColor} hover:bg-${displayColor} hover:text-white`,
+          `px-3.5 py-1.5 rounded bg-white text-${displayColor} hover:bg-${displayColor} hover:text-white truncate`,
           hasBorder && `border border-${displayColor}`
         )}
         {...props}

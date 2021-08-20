@@ -1,21 +1,35 @@
 import React from "react";
 import Button from "../../common/view/components/atoms/Button";
+import { useModalStore } from "../../common/view/store/modalStore";
 import { Challenge } from "../domain/Challenge";
 import ChallengeDescription from "./ChallengeDescription";
+import ModalApplication from "./ModalApplication";
 
-export default function ChallengeDetailBody({
-  intro,
-  result,
-  description,
-  duration,
-  developersAmount,
-  startDate,
-}: Challenge) {
+export default function ChallengeDetailBody(challenge: Challenge) {
+  const {
+    intro,
+    result,
+    description,
+    duration,
+    developersAmount,
+    startDate,
+    name,
+  } = challenge;
+  const { setModal } = useModalStore();
   return (
     <div className="pt-6">
       <div className="flex items-center justify-between">
         <p className={"font-display italic tracking-widest"}>{intro}</p>
-        <Button>Join challenge</Button>
+        <Button
+          onClick={() =>
+            setModal({
+              title: "Apply to challenge " + name,
+              content: <ModalApplication challenge={challenge} />,
+            })
+          }
+        >
+          Join challenge
+        </Button>
       </div>
       <h3 className="font-display font-bold text-xl pt-8 pb-1">
         We need you to create...

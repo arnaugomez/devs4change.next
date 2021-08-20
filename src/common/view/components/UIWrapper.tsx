@@ -3,6 +3,7 @@ import Footer from "../../../navigation/view/components/Footer";
 import Header from "../../../navigation/view/components/Header";
 import Alerts from "./Alerts";
 import HeaderBackground from "./HeaderBackground";
+import Modal from "./Modal";
 
 interface Props {
   children: ReactNode;
@@ -16,6 +17,7 @@ export default function UIWrapper({ children }: Props) {
       <Alerts />
       <main>{children}</main>
       <Footer />
+      <Modal />
     </>
   );
 }

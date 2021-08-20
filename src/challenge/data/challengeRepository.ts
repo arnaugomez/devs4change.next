@@ -13,7 +13,10 @@ import { db } from "../../common/data/firebase";
 import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
 import { User } from "../../user/domain/User";
 import { Challenge } from "../domain/Challenge";
-import { CreateChallengeVariables } from "./challengeRepositoryVariables";
+import {
+  ApplyToChallengeVariables,
+  CreateChallengeVariables,
+} from "./challengeRepositoryVariables";
 import { challengeFromFirebase } from "./transformers/challengeFromFirebase";
 
 export async function getChallengeBySlug(slug: string): Promise<Challenge> {
@@ -58,4 +61,17 @@ export async function getLatestChallenges(): Promise<Challenge[]> {
   const challengesSnapshots = await getDocs(firstChallenges);
   console.log(challengesSnapshots.docs);
   return await Promise.all(challengesSnapshots.docs.map(challengeFromFirebase));
+}
+
+export async function applyToChallenge(
+  variables: ApplyToChallengeVariables
+): Promise<void> {
+  const { user, challenge, ...restVariables } = variables;
+  const userRef = doc(db, "users", user.id);
+  const challengeRef = doc(db, "challenges", challenge.id);
+  await addDoc(collection(db, "applications"), {
+    user: userRef,
+    challenge: challengeRef,
+    ...restVariables,
+  });
 }

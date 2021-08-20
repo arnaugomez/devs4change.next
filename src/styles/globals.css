@@ -30,3 +30,15 @@ a {
   box-sizing: border-box;
 }
 
+.devs4change__modal {
+  max-height: calc(100vh - 5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: calc(100vw - 2rem);
+}
+
+@media (min-width: 600px) {
+  .devs4change__modal {
+    min-width: 30rem;
+  }
+}

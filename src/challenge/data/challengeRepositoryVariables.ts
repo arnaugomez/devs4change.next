@@ -1,3 +1,6 @@
+import { User } from "../../user/domain/User";
+import { Challenge } from "../domain/Challenge";
+
 export interface CreateChallengeVariables {
   name: string;
   /** Short description of the challenge */
@@ -12,4 +15,11 @@ export interface CreateChallengeVariables {
   developersAmount?: number;
   /** Expected date that the challenge will start */
   startDate?: Date;
+}
+
+export interface ApplyToChallengeVariables {
+  user: User;
+  challenge: Challenge;
+  contribution: string;
+  pitch: string;
 }

@@ -1,6 +1,12 @@
 import { useUserStore } from "../../../user/view/store/userStore";
-import { createChallenge } from "../../data/challengeRepository";
-import { CreateChallengeVariables } from "../../data/challengeRepositoryVariables";
+import {
+  applyToChallenge,
+  createChallenge,
+} from "../../data/challengeRepository";
+import {
+  ApplyToChallengeVariables,
+  CreateChallengeVariables,
+} from "../../data/challengeRepositoryVariables";
 import { Challenge } from "../../domain/Challenge";
 
 export function useChallengeStore() {
@@ -9,5 +15,14 @@ export function useChallengeStore() {
     return await createChallenge(values, user);
   }
 
-  return { create };
+  async function apply(
+    variables: Omit<ApplyToChallengeVariables, "user">
+  ) {
+    return await applyToChallenge({
+      user,
+      ...variables,
+    });
+  }
+
+  return { create, apply };
 }

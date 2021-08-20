@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function HeaderLogo() {
   return (
-    <h1 className="font-display font-light italic text-3xl transform -translate-y-0.5">
+    <h1 className="font-display font-light italic text-3xl transform -translate-y-0.5 flex-none">
       <Link href="/">Devs for Change</Link>
     </h1>
   )
