@@ -59,7 +59,6 @@ export async function getLatestChallenges(): Promise<Challenge[]> {
     limit(20)
   );
   const challengesSnapshots = await getDocs(firstChallenges);
-  console.log(challengesSnapshots.docs);
   return await Promise.all(challengesSnapshots.docs.map(challengeFromFirebase));
 }
 
