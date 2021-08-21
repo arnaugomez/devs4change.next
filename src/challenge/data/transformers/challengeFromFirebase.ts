@@ -4,7 +4,6 @@ import {
   DocumentSnapshot,
   getDoc,
 } from "firebase/firestore";
-import { date } from "yup/lib/locale";
 import { cleanse } from "../../../common/utils/cleanse";
 import { firebaseUserToUser } from "../../../user/data/transformers/firebaseUserToUser";
 import { Challenge } from "../../domain/Challenge";

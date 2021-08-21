@@ -2,6 +2,7 @@ import { User } from "../../user/domain/User";
 import { Challenge } from "./Challenge";
 
 export interface Application {
+  id: string;
   /** The dev that applies to the challenge */
   user: User;
   challenge: Challenge;

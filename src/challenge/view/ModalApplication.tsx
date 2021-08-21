@@ -9,6 +9,7 @@ import { useChallengeStore } from "./store/challengeStore";
 
 interface Props {
   challenge: Challenge;
+  reloadApplications: Function;
 }
 
 interface FormValues {
@@ -26,7 +27,10 @@ const schema = yup.object().shape({
   intro: yup.string().notRequired(),
 });
 
-export default function ModalApplication({ challenge }: Props) {
+export default function ModalApplication({
+  challenge,
+  reloadApplications,
+}: Props) {
   const { clearModal } = useModalStore();
   const { apply } = useChallengeStore();
 
@@ -36,6 +40,7 @@ export default function ModalApplication({ challenge }: Props) {
   ) {
     await apply({ challenge, ...values });
     helpers.setSubmitting(false);
+    reloadApplications();
     clearModal();
   }
 

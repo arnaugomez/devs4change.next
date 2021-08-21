@@ -5,7 +5,12 @@ import { Challenge } from "../domain/Challenge";
 import ChallengeDescription from "./ChallengeDescription";
 import ModalApplication from "./ModalApplication";
 
-export default function ChallengeDetailBody(challenge: Challenge) {
+interface Props {
+  challenge: Challenge,
+  reloadApplications: Function
+}
+
+export default function ChallengeDetailBody({challenge, reloadApplications}: Props) {
   const {
     intro,
     result,
@@ -24,7 +29,7 @@ export default function ChallengeDetailBody(challenge: Challenge) {
           onClick={() =>
             setModal({
               title: "Apply to challenge " + name,
-              content: <ModalApplication challenge={challenge} />,
+              content: <ModalApplication challenge={challenge} reloadApplications={reloadApplications} />,
             })
           }
         >
