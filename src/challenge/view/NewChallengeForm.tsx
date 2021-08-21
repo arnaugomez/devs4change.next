@@ -6,6 +6,7 @@ import Button from "../../common/view/components/atoms/Button";
 import InputDate from "../../common/view/components/forms/InputDate";
 import InputNumber from "../../common/view/components/forms/InputNumber";
 import InputText from "../../common/view/components/forms/InputText";
+import InputWysiwig from "../../common/view/components/forms/InputWysiwig";
 import { useChallengeStore } from "./store/challengeStore";
 
 interface FormValues {
@@ -143,6 +144,17 @@ export default function NewChallengeForm() {
               errors.startDate &&
               touched.startDate &&
               (errors.startDate as string)
+            }
+          />
+          <InputWysiwig
+            value={values.description}
+            placeholder="This is an optional field"
+            label="Add a description to your challenge"
+            onChange={(content) => setFieldValue('description', content)}
+            error={
+              errors.description &&
+              touched.description &&
+              (errors.description as string)
             }
           />
           <div className="flex justify-end">

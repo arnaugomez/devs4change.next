@@ -40,7 +40,7 @@ export default function ChallengeDetailBody({challenge, reloadApplications}: Pro
         We need you to create...
       </h3>
       <p>{result}</p>
-      <div className="flex">
+      <div className="flex pb-8">
         <div className="flex-1">
           <h3 className="font-display font-bold text-xl pt-8 pb-1">
             Start date

@@ -8,7 +8,7 @@ export default function ChallengeDescription({
   return (
     description && (
       <div>
-        <h2 className="text-2xl font-display font-bold">Description</h2>
+        <h2 className="text-2xl font-display font-bold pb-1">Description</h2>
         <FormattedMarkup markup={description} />
       </div>
     )

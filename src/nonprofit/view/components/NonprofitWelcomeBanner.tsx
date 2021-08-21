@@ -16,7 +16,7 @@ export default function NonprofitWelcomeBanner({ user }: Props) {
       <p>
         In devs4change,{" "}
         <strong>
-          nonprofits create challenges so that developers can apply and work
+          nonprofits create challenges so that developers can work
           together on them.
         </strong>
       </p>
