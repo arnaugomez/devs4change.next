@@ -23,7 +23,7 @@ const MODULES = {
   ],
 };
 
-export default class InputWysiwig extends Component<Props, state> {
+export default class InputWysiwig extends Component<Props, State> {
   state = {
     quill: null,
   };
