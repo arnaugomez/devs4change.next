@@ -21,7 +21,7 @@ export default function ProfilePage() {
       user={user}
       developer={developer}
       nonprofit={nonprofit}
-      isLoggedIn
+      isPrivate
     />
   );
 }

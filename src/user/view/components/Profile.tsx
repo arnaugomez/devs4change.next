@@ -1,8 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { getApplicationsOfUser } from "../../../challenge/data/applicationRepository";
-import { Application } from "../../../challenge/domain/Application";
-import ProfileApplicationsList from "../../../challenge/view/ProfileApplicationsList";
-import Loading from "../../../common/view/components/atoms/Loading";
+import React, {  useEffect } from "react";
 import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { useHeaderBackgroundStore } from "../../../common/view/store/headerBackgroundStore";
 import { Developer } from "../../../developer/domain/Developer";
@@ -18,12 +14,12 @@ export interface Props {
   /**
    * Whether the user shown in this profile page is the one who has logged in
    */
-  isLoggedIn: boolean;
+  isPrivate: boolean;
   nonprofit: Nonprofit;
   developer: Developer;
 }
 
-export default function Profile({ user, isLoggedIn }: Props) {
+export default function Profile({ user, isPrivate }: Props) {
   const { setHeaderBackground, clearHeaderBackground } =
     useHeaderBackgroundStore();
 
@@ -43,7 +39,7 @@ export default function Profile({ user, isLoggedIn }: Props) {
   return (
     <section className="px-4">
       <MaxWidth>
-        <ProfileHeader user={user} />
+        <ProfileHeader user={user} isPrivate={isPrivate} />
         <ProfileBio user={user} />
         {user.type === UserType.DEV && (
           <DeveloperProfileApplications user={user} />

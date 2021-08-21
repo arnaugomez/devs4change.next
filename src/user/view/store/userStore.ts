@@ -6,6 +6,7 @@ import { UserType } from "../../domain/UserType";
 import { useNonprofitStore } from "../../../nonprofit/view/store/nonprofitStore";
 import { useDeveloperStore } from "../../../developer/view/store/developerStore";
 import {
+  editUser,
   getPersistedUser,
   loginUser,
   loginUserWithGoogle,
@@ -15,6 +16,7 @@ import {
   registerUserWithGoogle,
 } from "../../data/userRepository";
 import { useCallback } from "react";
+import { EditUserVariables } from "../../data/variables/editUserVariables";
 
 const userState = atom<User>({
   key: "user",
@@ -129,8 +131,17 @@ export function useUserStore() {
       } else if (loggedUser.type === UserType.NONPROFIT) {
         await nonprofitStore.loginNonprofit(loggedUser);
       }
-      console.log(loggedUser);
       setUser(loggedUser);
+    } catch (e) {
+      console.error(e);
+      errorAlert(e.message);
+    }
+  }
+
+  async function edit(variables: Omit<EditUserVariables, "userId">) {
+    try {
+      const newUser = await editUser({ userId: user.id, ...variables });
+      setUser(newUser);
     } catch (e) {
       console.error(e);
       errorAlert(e.message);
@@ -146,5 +157,6 @@ export function useUserStore() {
     getPersisted,
     joinWithGoogle,
     loginWithGoogle,
+    edit,
   };
 }

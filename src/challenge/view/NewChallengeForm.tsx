@@ -150,11 +150,9 @@ export default function NewChallengeForm() {
             value={values.description}
             placeholder="This is an optional field"
             label="Add a description to your challenge"
-            onChange={(content) => setFieldValue('description', content)}
+            onChange={(content) => setFieldValue("description", content)}
             error={
-              errors.description &&
-              touched.description &&
-              (errors.description as string)
+              errors.description && touched.description && errors.description
             }
           />
           <div className="flex justify-end">

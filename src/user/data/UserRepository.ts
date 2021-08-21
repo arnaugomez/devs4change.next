@@ -15,6 +15,7 @@ import {
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import slugify from "slugify";
@@ -23,11 +24,12 @@ import { getCompositeSlug } from "../../common/utils/getCompositeSlug";
 import { User } from "../domain/User";
 import { UserType } from "../domain/UserType";
 import { firebaseUserToUser } from "./transformers/firebaseUserToUser";
+import { EditUserVariables } from "./variables/editUserVariables";
 
 async function generateUserSlug(displayName: string): Promise<string> {
   let slug = slugify(displayName, { lower: true });
   let num = 0;
-  while (await getUserBySlug(getCompositeSlug(slug, num))) {
+  while (await getUserBySlug(getCompositeSlug(slug, num)) || getCompositeSlug(slug, num) === "edit") {
     num++;
   }
   return getCompositeSlug(slug, num);
@@ -106,4 +108,11 @@ export async function registerUserWithGoogle(
 export async function loginUserWithGoogle(): Promise<User> {
   const { user } = await signInWithPopup(auth, googleAuthProvider);
   return await getUserByUid(user.uid);
+}
+
+export async function editUser(variables: EditUserVariables): Promise<User> {
+  const {userId, ...restVariables} = variables;
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {...restVariables})
+  return await getUserByUid(userId);
 }

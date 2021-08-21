@@ -1,15 +1,17 @@
 import classNames from "classnames";
 import React from "react";
+import Link from "next/link";
+import Button from "../../../common/view/components/atoms/Button";
 import SafeImage from "../../../common/view/components/atoms/SafeImage";
 import Tag from "../../../common/view/components/atoms/Tag";
 import { User } from "../../domain/User";
 import { UserType } from "../../domain/UserType";
-
 interface Props {
   user: User;
+  isPrivate: boolean;
 }
 
-export default function ProfileHeader({ user }: Props) {
+export default function ProfileHeader({ user, isPrivate }: Props) {
   const userTypeText = user.type === UserType.DEV ? "developer" : "nonprofit";
   const placeholderIntroText = `I'm a ${userTypeText}`;
   const textColor =
@@ -39,7 +41,17 @@ export default function ProfileHeader({ user }: Props) {
             {user.intro ?? placeholderIntroText}
           </p>
         </div>
-        <div className="flex-none">
+        <div className="flex-none flex flex-col gap-3">
+          {isPrivate && (
+            <Link href="/profile/edit" passHref>
+              <Button
+                color={user.type === UserType.DEV ? "cta" : "brand"}
+                isLink
+              >
+                Edit profile
+              </Button>
+            </Link>
+          )}
           <Tag
             text={userTypeText}
             tagStyle={user.type === UserType.DEV ? "cta" : "brand"}

@@ -31,11 +31,11 @@ export async function getServerSideProps({ params: { slug } }: Context) {
 }
 
 export default function ProfileSlug(payload: Payload) {
-  const userStore = useUserStore();
+  const {user} = useUserStore();
   return (
     <Profile
       {...payload}
-      isLoggedIn={userStore.user && userStore.user.id === payload.user.id}
+      isPrivate={user && user.id === payload.user.id}
     />
   );
 }
