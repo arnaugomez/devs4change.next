@@ -6,7 +6,6 @@ import {
   setPersistence,
   browserLocalPersistence,
   signInWithPopup,
-  GoogleAuthProvider,
 } from "firebase/auth";
 import {
   collection,
