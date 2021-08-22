@@ -14,7 +14,7 @@ import {
   persistUserData,
   registerUser,
   registerUserWithGoogle,
-} from "../../data/userRepository";
+} from "../../data/UserRepository";
 import { useCallback } from "react";
 import { EditUserVariables } from "../../data/variables/editUserVariables";
 
