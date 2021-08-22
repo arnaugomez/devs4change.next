@@ -6,7 +6,7 @@ Devs4Change is a social network where people who are learning software developme
 2. Several developers apply to the challenge
 3. The organization selects a team of developers and they work together on the challenge.
 
-:point_right: [Visit the website](https://www.devs4change.arnaugomez.com)
+:point_right: [Visit the website](https://devs4change.arnaugomez.com)
 
 ## Built with
 
